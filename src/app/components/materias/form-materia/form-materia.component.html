@@ -1,0 +1,171 @@
+<button mat-icon-button (click)="regresar()">
+    <mat-icon>arrow_back</mat-icon>
+</button>
+<form *ngIf="data.length > 0; else loading" (ngSubmit)="guardar()" [formGroup]="form">
+    <div *ngFor="let campo of data; let i = index" [ngSwitch]="campo.type">
+        <p *ngSwitchCase="'textbox'">
+            <mat-form-field appearance="outline">
+                <mat-label> {{ campo.label }} </mat-label>
+                <input matInput [placeholder]="campo.label" [formControlName]="campo.key" />
+            </mat-form-field>
+        </p>
+
+        <p *ngSwitchCase="'number'">
+            <mat-form-field appearance="outline">
+                <mat-label> {{ campo.label }} </mat-label>
+                <input matInput type="number" [placeholder]="campo.key" [formControlName]="campo.key" required />
+            </mat-form-field>
+        </p>
+
+        <p *ngSwitchCase="'select'">
+            <mat-form-field *ngIf="campo.label === 'Docente'">
+                <mat-label>{{ campo.label }}</mat-label>
+                <mat-select [compareWith]="selectUsuario" [formControlName]="campo.key">
+                    <mat-option *ngFor="let option of campo.option" [value]="option.key">
+                        {{ option.value }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="campo.label !== 'Docente'">
+                <mat-label>{{ campo.label }}</mat-label>
+                <mat-select [formControlName]="campo.key">
+                    <mat-option *ngFor="let option of campo.option" [value]="option.key">
+                        {{ option.value }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+
+        <p *ngSwitchCase="'textarea'">
+            <mat-form-field appearance="outline">
+                <mat-label>{{ campo.label }}</mat-label>
+                <textarea
+                    matInput
+                    cdkTextareaAutosize
+                    cdkAutosizeMaxRows="20"
+                    placeholder="Descripcion de la Asignatura"
+                    [formControlName]="campo.key"
+                ></textarea>
+            </mat-form-field>
+        </p>
+
+        <div *ngSwitchCase="'array'">
+            <h3>{{ campo.label }}</h3>
+            <div [formArrayName]="campo.key">
+                <div *ngFor="let item of getForm(campo.key).controls; let indexArray = index">
+                    <div [ngSwitch]="campo.controls[indexArray].type">
+                        <div *ngSwitchCase="'textbox'">
+                            <p>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>
+                                        {{ campo.controls[indexArray].label }}
+                                    </mat-label>
+                                    <input
+                                        matInput
+                                        [placeholder]="campo.controls[indexArray].label"
+                                        [formControlName]="campo.controls[indexArray].key"
+                                        required
+                                    />
+                                </mat-form-field>
+                                <button mat-icon-button type="button" (click)="eliminar(campo.key, indexArray)">
+                                    <mat-icon>clear</mat-icon>
+                                </button>
+                            </p>
+                        </div>
+
+                        <div *ngSwitchCase="'textarea'">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{ campo.controls[indexArray].label }}</mat-label>
+                                <textarea
+                                    style="white-space: pre-wrap;"
+                                    matInput
+                                    cdkAutosizeMinRows="20"
+                                    placeholder="Descripcion de la Asignatura"
+                                    [formControlName]="campo.controls[indexArray].key"
+                                >
+                                </textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div [ngSwitch]="campo.type" *ngIf="seccion === 'criterio'">
+                    <div *ngSwitchCase="'array'">
+                        <div *ngFor="let tipo of campo.controls; let indexTipo = index">
+                            <h4>Nota: {{ indexTipo + 1 }}</h4>
+                            <div [formArrayName]="indexTipo">
+                                <div *ngFor="let item of tipo">
+                                    <div [ngSwitch]="item.type">
+                                        <div *ngSwitchCase="'textbox'">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>
+                                                    {{ item.label }}
+                                                </mat-label>
+                                                <input
+                                                    matInput
+                                                    [placeholder]="item.label"
+                                                    [formControlName]="item.key"
+                                                    required
+                                                />
+                                            </mat-form-field>
+                                        </div>
+                                        <div *ngSwitchCase="'number'">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>
+                                                    {{ item.label }}
+                                                </mat-label>
+                                                <input
+                                                    matInput
+                                                    type="number"
+                                                    [placeholder]="item.label"
+                                                    [formControlName]="item.key"
+                                                    required
+                                                />
+                                            </mat-form-field>
+                                        </div>
+                                        <div *ngSwitchCase="'array'">
+                                            <div
+                                                [formArrayName]="'detalleTipo'"
+                                                *ngFor="let detalle of item.defaultValue; let index = index"
+                                            >
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>
+                                                        {{ item.label }}
+                                                    </mat-label>
+                                                    <input
+                                                        matInput
+                                                        [placeholder]="item.label"
+                                                        [formControlName]="index"
+                                                        required
+                                                    />
+                                                </mat-form-field>
+                                                <button
+                                                    mat-icon-button
+                                                    type="button"
+                                                    (click)="eliminar(campo.key, index, indexTipo)"
+                                                >
+                                                    <mat-icon>clear</mat-icon>
+                                                </button>
+                                            </div>
+                                            <button type="button" (click)="addDetalle(indexTipo)">
+                                                Agregar Detalle
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button mat-flat-button color="warn" (click)="addControl(campo, i)" type="button">
+                Agregar Campo
+            </button>
+        </div>
+    </div>
+
+    <button mat-raised-button type="submit" color="primary" style="margin: 1rem 0; width: 100%;">
+        Guardar
+    </button>
+</form>
+
+<ng-template #loading><app-load></app-load></ng-template>

@@ -1,0 +1,35 @@
+mat-sidenav-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+mat-sidenav{
+  width: 280px;
+}
+.mat-list-base {
+  padding: 0;
+}
+
+mat-list a {
+  text-align: left;
+  padding: 8px 8px 8px 20px;
+  text-transform: uppercase;
+  font-weight: 400;
+  /* font-size: 18px; */
+}
+
+mat-list a:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: #B42A2A;
+}
+
+.selected {
+  color: #B42A2A;
+}
+
+.main-content {
+  margin: 1rem;
+}

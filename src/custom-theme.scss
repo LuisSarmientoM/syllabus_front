@@ -1,0 +1,21 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+$syllabus-primary: mat-palette($mat-red); // #b42a2a
+$syllabus-accent: mat-palette($mat-gray);
+$syllabus-warn: mat-palette($mat-gray, 800);
+
+$syllabus-theme: mat-light-theme(
+    $syllabus-primary,
+    $syllabus-accent,
+    $syllabus-warn
+);
+
+@include angular-material-theme($syllabus-theme);
+
+:root {
+    --color-primary: #{mat-color($syllabus-primary)};
+    --color-accent: #{mat-color($syllabus-accent)};
+    --color-warn: #{mat-color($syllabus-warn)};
+}

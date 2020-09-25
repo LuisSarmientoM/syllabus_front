@@ -1,0 +1,401 @@
+<div *ngIf="materia != null">
+    <div style="display: flex; justify-content: space-between;">
+        <button mat-icon-button (click)="regresar()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <mat-form-field class="version">
+            <mat-label>Version</mat-label>
+            <mat-select (valueChange)="version($event)">
+                <mat-option *ngFor="let version of versiones" [value]="version._id">
+                    {{ version.version }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-raised-button (click)="descargar()">
+            Descargar Documento
+        </button>
+    </div>
+
+    <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ materia.principal.nombreMateria }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{ materia.principal.codigoMateria }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>
+                <strong>Numero de Creditos: </strong>
+                {{ materia.principal.numeroCreditos }}
+            </p>
+            <p><strong>Semestre: </strong>{{ materia.principal.semestre }}</p>
+            <p><strong>Caracter: </strong>{{ materia.principal.caracter }}</p>
+            <p><strong>Ciclo: </strong>{{ materia.principal.ciclo }}</p>
+            <p><strong>componente: </strong>{{ materia.principal.componente }}</p>
+            <p>
+                <strong>docente: </strong>
+                {{ materia.principal.docente.nombre }}
+                {{ materia.principal.docente.primerApellido }}
+                {{ materia.principal.docente.segundoApellido }}
+            </p>
+            <mat-action-row>
+                <a
+                    role="button"
+                    mat-raised-button
+                    color="warn"
+                    [routerLink]="['/materias/' + materia._id, 'principal']"
+                    *ngIf="!isOld"
+                >
+                    Editar
+                </a>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <!-- Principal de la Asignatura -->
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Duracion de la Asignatura
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+                <strong>Numero de Semanas: </strong>
+                {{ materia.duracion.numeroSemanas }}
+            </p>
+            <p>
+                <strong>Numero de Horas Semanales: </strong>
+                {{ materia.duracion.numeroHorasSemanales }}
+            </p>
+            <p>
+                <strong>Numero de Horas de Acompanamiento Teorico: </strong>
+                {{ materia.duracion.numeroHorasAcompanamientoTeorico }}
+            </p>
+            <p>
+                <strong>Numero de Horas de Acompanamiento Practico: </strong>
+                {{ materia.duracion.numeroHorasAcompanamientoPractico }}
+            </p>
+            <p>
+                <strong>Numero de Horas de Acompanamiento Total: </strong>
+                {{ materia.duracion.numeroHorasAcompanamientoTotal }}
+            </p>
+            <p>
+                <strong>Numero de Horas de Independiente Teorico: </strong>
+                {{ materia.duracion.numeroHorasIndependienteTeorico }}
+            </p>
+            <p>
+                <strong>Numero de Horas de Independiente Practico: </strong>
+                {{ materia.duracion.numeroHorasIndependientePractico }}
+            </p>
+            <p>
+                <strong>Numero de Horas de Independiente Total: </strong>
+                {{ materia.duracion.numeroHorasIndependienteTotal }}
+            </p>
+            <mat-action-row>
+                <a role="button" mat-raised-button color="warn" [routerLink]="['/materias/' + materia._id, 'duracion']">
+                    Editar
+                </a>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <!-- Duracion de la Asignatura -->
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Descripcion de la Asignatura
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+                {{ materia.descripcion.descripcion }}
+            </p>
+            <mat-action-row>
+                <a
+                    role="button"
+                    mat-raised-button
+                    color="warn"
+                    [routerLink]="['/materias/' + materia._id, 'descripcion']"
+                    *ngIf="!isOld"
+                >
+                    Editar
+                </a>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <!-- Descripcion -->
+
+        <mat-expansion-panel class="metas">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Metas Aprendizaje
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-card>
+                <mat-card-content>
+                    <div class="mat-typography">
+                        <h2>
+                            Competencias Basicas
+                        </h2>
+                        <ul>
+                            <li *ngFor="let competencia of materia.metasAprendizaje.competenciasBasicas">
+                                <h4>
+                                    <strong>{{ competencia.titulo }}</strong>
+                                </h4>
+                                <ul>
+                                    <li *ngFor="let descripcion of competencia.descripcion">
+                                        {{ descripcion }}
+                                    </li>
+                                </ul>
+                                <a
+                                    role="button"
+                                    mat-raised-button
+                                    color="warn"
+                                    [routerLink]="[
+                                        '/materias/' + materia._id + '-' + competencia._id + '-basicas',
+                                        'metas'
+                                    ]"
+                                    *ngIf="!isOld"
+                                >
+                                    Editar
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <a
+                        role="button"
+                        mat-raised-button
+                        color="warn"
+                        [routerLink]="['/materias/' + materia._id + '-nuevo-basicas', 'metas']"
+                        *ngIf="!isOld"
+                    >
+                        Crear Competencia Basicas
+                    </a>
+                </mat-card-actions>
+            </mat-card>
+            <mat-card>
+                <mat-card-content>
+                    <div class="mat-typography">
+                        <h2>
+                            Competencias Genericas
+                        </h2>
+                        <ul>
+                            <li *ngFor="let competencia of materia.metasAprendizaje.competenciasGenericas">
+                                <h4>
+                                    <strong>{{ competencia.titulo }}</strong>
+                                </h4>
+                                <ul>
+                                    <li *ngFor="let descripcion of competencia.descripcion">
+                                        {{ descripcion }}
+                                    </li>
+                                </ul>
+                                <a
+                                    role="button"
+                                    mat-raised-button
+                                    color="warn"
+                                    [routerLink]="[
+                                        '/materias/' + materia._id + '-' + competencia._id + '-genericas',
+                                        'metas'
+                                    ]"
+                                    *ngIf="!isOld"
+                                >
+                                    Genericas
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <a
+                        role="button"
+                        mat-raised-button
+                        color="warn"
+                        [routerLink]="['/materias/' + materia._id + '-nuevo-genericas', 'metas']"
+                        *ngIf="!isOld"
+                    >
+                        Crear Competencia Genericas
+                    </a>
+                </mat-card-actions>
+            </mat-card>
+            <mat-card>
+                <mat-card-content>
+                    <div class="mat-typography">
+                        <h2>
+                            Competencias Especificas
+                        </h2>
+                        <ul>
+                            <li *ngFor="let competencia of materia.metasAprendizaje.competenciasEspecificas">
+                                <h4>
+                                    <strong>{{ competencia.titulo }}</strong>
+                                </h4>
+                                <ul>
+                                    <li *ngFor="let descripcion of competencia.descripcion">
+                                        {{ descripcion }}
+                                    </li>
+                                </ul>
+                                <a
+                                    role="button"
+                                    mat-raised-button
+                                    color="warn"
+                                    [routerLink]="[
+                                        '/materias/' + materia._id + '-' + competencia._id + '-especificas',
+                                        'metas'
+                                    ]"
+                                    *ngIf="!isOld"
+                                >
+                                    Editar
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <a
+                        role="button"
+                        mat-raised-button
+                        color="warn"
+                        [routerLink]="['/materias/' + materia._id + '-nuevo-especificas', 'metas']"
+                        *ngIf="!isOld"
+                    >
+                        Crear Competencia especifica
+                    </a>
+                </mat-card-actions>
+            </mat-card>
+        </mat-expansion-panel>
+        <!-- Metas Aprendizaje -->
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Contenido Tematico
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ul>
+                <li *ngFor="let contenidoTematico of materia.contenidoTematico">
+                    <div class="contenido">
+                        <h3>{{ contenidoTematico.unidadTematica }}</h3>
+                        <a
+                            role="button"
+                            mat-raised-button
+                            color="accent"
+                            [routerLink]="['/materias/' + materia._id + '-' + contenidoTematico._id, 'contenido']"
+                            *ngIf="!isOld"
+                        >
+                            Editar
+                        </a>
+                        <button mat-icon-button [mat-menu-trigger-for]="menu">
+                            <mat-icon>more_vert </mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="delete(materia, contenidoTematico)">
+                                <mat-icon>delete</mat-icon>
+                                Eliminar
+                            </button>
+                        </mat-menu>
+                    </div>
+                </li>
+            </ul>
+            <mat-action-row>
+                <a
+                    role="button"
+                    mat-raised-button
+                    color="warn"
+                    [routerLink]="['/materias/' + materia._id + '-nuevo', 'contenido']"
+                    *ngIf="!isOld"
+                >
+                    Nuevo Tema
+                </a>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <!--Contenido Tematico-->
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Metodologia y estrategias pedagógicas
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <p>
+                {{ materia.metodologia.metodologia }}
+            </p>
+
+            <mat-action-row>
+                <a
+                    role="button"
+                    mat-raised-button
+                    color="warn"
+                    [routerLink]="['/materias/' + materia._id, 'metodologia']"
+                    *ngIf="!isOld"
+                >
+                    Editar
+                </a>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <!-- Metodologia y estrategias pedagógicas empleadas en el desarrollo de la asignatura -->
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Criterios de Evaluacion
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+                La evaluación se realiza de forma sistemática, permanente y concomitante con el desarrollo del
+                pensamiento, habilidades, destrezas y valores en el estudiante. Es de carácter formativo y sumativa.
+                Para efectos de control en la institución, la evaluación sumativa del semestre se hace de acuerdo con
+                los siguientes valores:
+            </p>
+
+            <mat-card *ngFor="let criterio of materia.criterioEvaluacion; let i = index" class="notas mat-elevation-z8">
+                <mat-card-content>
+                    <div class="mat-typography">
+                        <h2>Nota: {{ i + 1 }} {{ criterio.notaPorcentaje }}%</h2>
+                        <h4>Duracion: {{ criterio.numeroSemanas }} Semanas</h4>
+                    </div>
+                    <h2>Tipo:</h2>
+                    <ul *ngFor="let tipos of criterio.tipo">
+                        <li>
+                            {{ tipos.tituloTipo }} - {{ tipos.porcentajeTipo }}%
+                            <ul>
+                                <li *ngFor="let tipo of tipos.detalleTipo">
+                                    {{ tipo }}
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <a
+                        role="button"
+                        mat-raised-button
+                        color="warn"
+                        [routerLink]="['/materias/' + materia._id + '-' + criterio._id, 'criterio']"
+                        *ngIf="!isOld"
+                    >
+                        Editar
+                    </a>
+                </mat-card-actions>
+            </mat-card>
+
+            <mat-action-row>
+                <a
+                    role="button"
+                    mat-raised-button
+                    color="warn"
+                    [routerLink]="['/materias/' + materia._id + '-nuevo', 'criterio']"
+                    *ngIf="!isOld"
+                >
+                    Nueva Evaluacion
+                </a>
+            </mat-action-row>
+        </mat-expansion-panel>
+        <!-- Criterios Evaluacion -->
+    </mat-accordion>
+</div>
+<button mat-raised-button style="margin-top: 2rem; width: 100%;" (click)="archivar()">
+    Archivar
+</button>

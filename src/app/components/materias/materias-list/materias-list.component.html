@@ -1,0 +1,48 @@
+<h1 *ngIf="materias.length === 0">No hay materias para mostra</h1>
+<section>
+    <mat-form-field *ngIf="materias.length > 0">
+        <mat-placeholder>Search reports</mat-placeholder>
+        <input matInput type="search" (keyup.enter)="busqueda(value)" #value />
+        <button mat-raised-button matSuffix color="primary" (click)="busqueda(value)">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+    <a mat-raised-button color="warn" [routerLink]="['/materias/nuevo/principal']">Crear Materia</a>
+</section>
+
+<div>
+    <mat-card
+        class="card pointer"
+        *ngFor="let materia of materias | paginator: page_size:page_number"
+        [routerLink]="['/materias', materia._id]"
+    >
+        <mat-card-header>
+            <mat-card-title>
+                {{ materia.principal.nombreMateria }}
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{ materia.principal.codigoMateria }}
+            </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div>
+                <p><strong> Ciclo: </strong> {{ materia.principal.ciclo }}</p>
+                <p>
+                    <strong> Numero de Creditos: </strong>
+                    {{ materia.principal.numeroCreditos }}
+                </p>
+                <p>
+                    <strong> Profesor: </strong>
+                    {{ materia.principal.docente.nombre }}
+                    {{ materia.principal.docente.primerApellido }}
+                    {{ materia.principal.docente.segundoApellido }}
+                </p>
+                <p><strong> Semestre: </strong> {{ materia.principal.semestre }}</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<mat-paginator [length]="numeroMaterias" [pageSize]="page_size" [pageSizeOptions]="[5]" (page)="cambiaPagina($event)">
+</mat-paginator>

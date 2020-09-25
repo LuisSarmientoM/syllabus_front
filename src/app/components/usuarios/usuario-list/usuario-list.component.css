@@ -1,0 +1,15 @@
+.card {
+    margin: 1rem 0;
+}
+strong:nth-child(1n + 2) {
+    margin-left: 2rem;
+}
+div {
+    display: flex;
+    justify-content: space-around;
+}
+section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+}

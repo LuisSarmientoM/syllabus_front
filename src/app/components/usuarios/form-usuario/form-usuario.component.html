@@ -1,0 +1,125 @@
+<a mat-icon-button (click)="regresar()">
+    <mat-icon>arrow_back</mat-icon>
+</a>
+
+<form [formGroup]="form" (ngSubmit)="guardar()">
+    <mat-form-field appearance="outline">
+        <mat-label>
+            Nombre
+        </mat-label>
+        <input
+            matInput
+            placeholder="Nombre del Profesor"
+            formControlName="nombre"
+            required
+        />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>
+            Primer Apellido
+        </mat-label>
+        <input
+            matInput
+            placeholder="Nombre del Profesor"
+            formControlName="primerApellido"
+            required
+        />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>
+            Segundo Apellido
+        </mat-label>
+        <input
+            matInput
+            placeholder="Nombre del Profesor"
+            formControlName="segundoApellido"
+            required
+        />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>
+            Numero Documento
+        </mat-label>
+        <input
+            matInput
+            placeholder="Cedula del Profesor"
+            formControlName="numeroDocumento"
+            required
+        />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>
+            Profesion
+        </mat-label>
+        <input
+            matInput
+            placeholder="Profesion del Profesor"
+            formControlName="profesion"
+            required
+        />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>
+            usuario
+        </mat-label>
+        <input
+            matInput
+            placeholder="Profesion del Profesor"
+            formControlName="username"
+            required
+        />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>
+            Role
+        </mat-label>
+        <mat-select formControlName="role">
+            <mat-option value="DOCENTE_ROLE">
+                DOCENTE
+            </mat-option>
+            <mat-option value="ADMINISTRADOR_ROLE">
+                ADMINISTRADOR
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>
+            Correo
+        </mat-label>
+        <input
+            matInput
+            placeholder="Correo del Profesor"
+            formControlName="correo"
+            required
+        />
+    </mat-form-field>
+    <!-- <div formArrayName="materias">
+        <h3>Materias</h3>
+        <div *ngFor="let materia of materias.controls; let i = index">
+            <mat-form-field appearance="outline">
+                <mat-label>
+                    Materia
+                </mat-label>
+                <input
+                    matInput
+                    placeholder="Nombre de la Materia"
+                    [formControlName]="i"
+                    required
+                />
+            </mat-form-field>
+        </div>
+
+        <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="agregarMateria()"
+        >
+            Agregar Materia
+        </button>
+    </div> -->
+
+    <button mat-raised-button color="primary" type="submit">
+        Guardar
+    </button>
+</form>

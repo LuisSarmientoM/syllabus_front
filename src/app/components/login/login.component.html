@@ -1,0 +1,58 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card>
+        <mat-card-header>
+            <img
+                class="alinearCentro"
+                src="../../../assets/logoLibre.png"
+                width="80"
+            />
+            <h2 class="displayInline">Universidad Libre</h2>
+        </mat-card-header>
+
+        <form (ngSubmit)="login()" [formGroup]="loginForm">
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre de usuario</mat-label>
+                <input
+                    autofocus
+                    matInput
+                    placeholder="Nombre de Usuario"
+                    formControlName="username"
+                    required
+                />
+                <!-- error -->
+                <mat-error *ngIf="submitted && f['username'].errors">
+                    <p *ngIf="f['username'].errors.required">
+                        Por favor digite un Nombre de Usuario valida
+                    </p>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input
+                    autofocus
+                    matInput
+                    type="password"
+                    placeholder="Contraseña"
+                    formControlName="password"
+                    required
+                />
+                <!-- error -->
+                <mat-error *ngIf="submitted && f['password'].errors">
+                    <p *ngIf="f['password'].errors.required">
+                        Por favor digite una contraseña valida
+                    </p>
+                    <p *ngIf="f['password'].errors.minlength">
+                        minimo
+                        {{ f["password"].errors.minlength.requiredLength }}
+                        digitos
+                    </p>
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit">
+                Iniciar sesion
+            </button>
+        </form>
+    </mat-card>
+</div>

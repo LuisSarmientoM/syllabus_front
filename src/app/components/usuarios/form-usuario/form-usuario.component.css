@@ -1,0 +1,11 @@
+mat-form-field, button, mat-slide-toggle{
+    width: 70%;
+    margin: 0 auto;
+}
+button, mat-slide-toggle{
+    margin: 0.5rem auto;
+}
+form, form > div, form > div div{
+    display: flex;
+    flex-direction: column;
+}

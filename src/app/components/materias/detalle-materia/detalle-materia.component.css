@@ -1,0 +1,21 @@
+a {
+    width: 100%;
+}
+.notas,
+.metas mat-card {
+    margin: 1rem 0;
+}
+.notas div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contenido {
+    display: flex;
+    align-content: space-between;
+}
+
+.contenido a {
+    width: 50%;
+    margin-left: auto;
+}

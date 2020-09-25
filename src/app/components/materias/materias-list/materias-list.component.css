@@ -1,0 +1,19 @@
+.card {
+    margin-bottom: 1rem;
+    width: auto;
+}
+strong:nth-child(1n + 2) {
+    margin-left: 2rem;
+}
+mat-card-content div {
+    display: flex;
+    justify-content: space-around;
+}
+mat-card {
+    width: 100%;
+}
+section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
+}

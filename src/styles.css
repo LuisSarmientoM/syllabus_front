@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.displayInline {
+  display: inline;
+}
+
+.alinearCentro {
+  vertical-align: middle;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+.acciones {
+  display: flex;
+  place-items: center;
+}
+
+.acciones button {
+  width: 30%;
+}
+
+.acciones mat-form-field {
+  margin-right: 12px;
+}
+.w-75 {
+  width: 75%;
+}
+.w-100 {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-card-header-text{
+  margin: 0 !important;
+}
+.pointer {
+  cursor: pointer;
+}
+input[type="number"]
+{
+    -webkit-appearance: textfield !important;
+    margin: 0;
+    -moz-appearance:textfield !important;
+}

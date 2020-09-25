@@ -1,0 +1,49 @@
+<section>
+    <mat-form-field>
+        <mat-placeholder>Search reports</mat-placeholder>
+        <input matInput type="search" (keyup.enter)="busqueda(value)" #value />
+        <button
+            mat-raised-button
+            matSuffix
+            color="primary"
+            (click)="busqueda(value)"
+        >
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+    <a mat-raised-button color="warn" [routerLink]="['/usuarios/nuevo']"
+        >Crear Usuario</a
+    >
+</section>
+<mat-card
+    class="card pointer"
+    *ngFor="let usuario of usuarios"
+    [routerLink]="['/usuarios', usuario._id]"
+    [ngStyle]="{ 'var(--color-warn)': usuario.estado }"
+>
+    <mat-card-header>
+        <mat-card-title>
+            {{ usuario.nombre }} {{ usuario.primerApellido }}
+            {{ usuario.segundoApellido }}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{ usuario.numeroDocumento }}
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div>
+            <p><strong> Profesion: </strong> {{ usuario.profesion }}</p>
+            <p><strong> Username: </strong> {{ usuario.username }}</p>
+            <p><strong> Correo: </strong> {{ usuario.correo }}</p>
+            <p><strong> Role: </strong> {{ usuario.role }}</p>
+        </div>
+    </mat-card-content>
+</mat-card>
+<mat-paginator
+    [length]="numeroUsuarios"
+    [pageSize]="page_size"
+    [pageSizeOptions]="[5]"
+    (page)="cambiaPagina($event)"
+>
+</mat-paginator>
