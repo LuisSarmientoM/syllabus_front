@@ -26,7 +26,6 @@ export class DetalleUsuarioComponent implements OnInit, OnDestroy {
   this.usuarioSuscribe = this._usuarioService
    .obtenerUsuario(this._id)
    .subscribe((res) => {
-    console.log(res);
     this.usuario = res;
    });
  }

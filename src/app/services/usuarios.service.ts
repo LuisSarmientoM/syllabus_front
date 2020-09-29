@@ -54,7 +54,7 @@ export class UsuariosService {
     },
     this.httpOptions
    )
-   .subscribe(() => console.log('Hecho'))
+   .subscribe()
    .unsubscribe();
  }
 }

@@ -113,7 +113,6 @@ export class MateriasService {
    )
    .subscribe((data) => {
     alert(`${unidadTematica} A sido eliminado`);
-    console.log(data);
    });
  }
  deleteMetaAprendizaje(
@@ -131,7 +130,6 @@ export class MateriasService {
    )
    .subscribe((data) => {
     alert(`Se eliminó la meta correctamente`);
-    console.log(data);
    });
  }
 }

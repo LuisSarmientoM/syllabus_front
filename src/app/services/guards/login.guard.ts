@@ -20,18 +20,5 @@ export class LoginGuard implements CanActivate {
     }
    )
   );
-  // return true;
-  //     console.log(token);
-  //     return false;
-  // });
  }
 }
-//     console.log(token);
-
-//     if (token === "ADMINISTRADOR_ROLE") {
-//         return true;
-//     } else {
-//         this.router.navigate(["/login"]);
-//         return false;
-//     }
-// });
