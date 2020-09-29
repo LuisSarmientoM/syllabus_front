@@ -1,20 +1,26 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { MatSidenav } from "@angular/material/sidenav";
-import { LoginService } from "src/app/components/login/login.service";
+import { Component, OnInit, Input } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { LoginService } from 'src/app/components/login/login.service';
 
 @Component({
-    selector: "app-navbar",
-    templateUrl: "./navbar.component.html",
-    styleUrls: ["./navbar.component.css"],
-    providers: [LoginService],
+ selector: 'app-navbar',
+ templateUrl: './navbar.component.html',
+ styleUrls: ['./navbar.component.css'],
+ providers: [LoginService],
 })
 export class NavbarComponent implements OnInit {
-    @Input() snav: MatSidenav;
-    constructor(private loginService: LoginService) {}
+ @Input() snav: MatSidenav;
 
-    ngOnInit(): void {}
+ @Input() usuario: {
+  nombre: string;
+  primerApellido: string;
+  segundoApellido: string;
+ };
+ constructor(private loginService: LoginService) {}
 
-    cerrarSesion() {
-        this.loginService.cerrarSesion();
-    }
+ ngOnInit(): void {}
+
+ cerrarSesion() {
+  this.loginService.cerrarSesion();
+ }
 }

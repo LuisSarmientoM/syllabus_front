@@ -1,63 +1,54 @@
 <mat-sidenav-container>
-    <mat-sidenav
-        #snav
-        class="mat-elevation-z3"
-        [mode]="mobileQuery.matches ? 'over' : 'side'"
-        [opened]="mobileQuery.matches ? false : true"
-        color="accent"
-    >
-        <!-- pc: movil -->
-        <img
-            class="alinearCentro"
-            src="../../../assets/logoLibre.png"
-            width="64"
-        />
-        <h2 class="displayInline">Universidad Libre</h2>
-        <mat-divider></mat-divider>
+ <mat-sidenav
+  #snav
+  class="mat-elevation-z3"
+  [mode]="mobileQuery.matches ? 'over' : 'side'"
+  [opened]="mobileQuery.matches ? false : true"
+  color="accent"
+ >
+  <!-- pc: movil -->
+  <img class="alinearCentro" src="../../../assets/logoLibre.png" width="64" />
+  <h2 class="displayInline">Universidad Libre</h2>
+  <mat-divider></mat-divider>
 
-        <!-- Navegacion -->
+  <!-- Navegacion -->
 
-        <mat-list role="list">
-            <a
-                class="mat-list-item"
-                mat-button
-                routerLink="/inicio"
-                routerLinkActive="selected"
-            >
-                <mat-icon>home</mat-icon>
-                <p class="displayInline">
-                    Inicio
-                </p>
-            </a>
-            <a
-                class="mat-list-item"
-                mat-button
-                routerLink="/materias"
-                routerLinkActive="selected"
-            >
-                <mat-icon>menu_book</mat-icon>
-                <p class="displayInline">
-                    Materias
-                </p>
-            </a>
-            <a
-                class="mat-list-item"
-                mat-button
-                routerLink="/usuarios"
-                routerLinkActive="selected"
-            >
-                <mat-icon>person</mat-icon>
-                <p class="displayInline">
-                    Usuarios
-                </p>
-            </a>
-        </mat-list>
-    </mat-sidenav>
+  <mat-list role="list">
+   <a
+    class="mat-list-item"
+    mat-button
+    routerLink="/inicio"
+    routerLinkActive="selected"
+   >
+    <mat-icon>home</mat-icon>
+    <p class="displayInline">Inicio</p>
+   </a>
+   <a
+    class="mat-list-item"
+    mat-button
+    routerLink="/materias"
+    routerLinkActive="selected"
+   >
+    <mat-icon>menu_book</mat-icon>
+    <p class="displayInline">Materias</p>
+   </a>
+   <a
+    *ngIf="usuario.role == 'ADMINISTRADOR_ROLE'"
+    class="mat-list-item"
+    mat-button
+    routerLink="/usuarios"
+    routerLinkActive="selected"
+   >
+    <mat-icon>person</mat-icon>
+    <p class="displayInline">Usuarios</p>
+   </a>
+  </mat-list>
+ </mat-sidenav>
 
-    <mat-sidenav-content>
-        <app-navbar [snav]="snav"></app-navbar>
-        <div class="main-content">
-            <router-outlet></router-outlet>
-        </div>
-    </mat-sidenav-content>
+ <mat-sidenav-content>
+  <app-navbar [snav]="snav" [usuario]="usuario"></app-navbar>
+  <div class="main-content">
+   <router-outlet></router-outlet>
+  </div>
+ </mat-sidenav-content>
 </mat-sidenav-container>

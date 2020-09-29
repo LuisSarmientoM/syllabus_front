@@ -1,18 +1,23 @@
 <mat-toolbar color="primary" class="mat-elevation-z3">
-    <mat-toolbar-row>
-        <button mat-icon-button (click)="snav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <span class="spacer"></span>
-        <button class="" mat-button [matMenuTriggerFor]="userMenu">
-            <!-- <span >{{usuario.primerNombre}} {{usuario.primerApellido}}</span> -->
-            <span> Luis Sarmiento</span>
-            <mat-icon mat-button-wrapper>person</mat-icon>
-        </button>
-    </mat-toolbar-row>
+ <mat-toolbar-row>
+  <button mat-icon-button (click)="snav.toggle()">
+   <mat-icon>menu</mat-icon>
+  </button>
+  <span class="spacer"></span>
+  <button class="" mat-button [matMenuTriggerFor]="userMenu">
+   <!-- <span >{{usuario.primerNombre}} {{usuario.primerApellido}}</span> -->
+   <span>
+    <span
+     >{{ usuario.nombre }} {{ usuario.primerApellido }}
+     {{ usuario.segundoApellido }}</span
+    ></span
+   >
+   <mat-icon mat-button-wrapper>person</mat-icon>
+  </button>
+ </mat-toolbar-row>
 </mat-toolbar>
 
 <mat-menu #userMenu="matMenu">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item (click)="cerrarSesion()">Cerrar sesion</button>
+ <button mat-menu-item>Item 1</button>
+ <button mat-menu-item (click)="cerrarSesion()">Cerrar sesion</button>
 </mat-menu>

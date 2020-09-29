@@ -1,21 +1,33 @@
 a {
-    width: 100%;
+ width: 100%;
 }
 .notas,
 .metas mat-card {
-    margin: 1rem 0;
+ margin: 1rem 0;
 }
 .notas div {
-    display: flex;
-    justify-content: space-between;
+ display: flex;
+ justify-content: space-between;
 }
 
 .contenido {
-    display: flex;
-    align-content: space-between;
+ display: flex;
+ align-content: space-between;
 }
 
 .contenido a {
-    width: 50%;
-    margin-left: auto;
+ width: 50%;
+ margin-left: auto;
+}
+.competencia {
+ display: flex;
+}
+
+.competencia strong,
+.competencia span {
+ width: 100%;
+}
+
+.text {
+ white-space: pre-line;
 }
