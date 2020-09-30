@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { Subscription } from 'rxjs';
 import { MateriaDTO } from 'src/app/interfaces/materia';
 import { MateriasService } from 'src/app/services/materias.service';
 @Component({
@@ -7,19 +8,23 @@ import { MateriasService } from 'src/app/services/materias.service';
  templateUrl: './materias-list.component.html',
  styleUrls: ['./materias-list.component.css'],
 })
-export class MateriasListComponent implements OnInit {
+export class MateriasListComponent implements OnInit, OnDestroy {
  materias: MateriaDTO[] = [];
  numeroMaterias: number;
  page_size: number = 5;
  page_number: number = 0;
+ suscriber: Subscription;
  constructor(private _materiaService: MateriasService) {}
+ ngOnDestroy(): void {
+  this.suscriber.unsubscribe();
+ }
 
  ngOnInit(): void {
   this.llenarMaterias();
  }
 
  llenarMaterias() {
-  this._materiaService
+  this.suscriber = this._materiaService
    .obtenerMaterias(this.page_number)
    .subscribe((res: any) => {
     this.materias = res.materias;
@@ -32,7 +37,14 @@ export class MateriasListComponent implements OnInit {
 
   this.llenarMaterias();
  }
- busqueda(e) {
-  alert('aqui se hará el filtro');
+ busqueda(e: string) {
+  if (e) {
+   this._materiaService.obtenerMateriasNombre(e).subscribe((res: any) => {
+    this.materias = res.materias;
+    this.numeroMaterias = res.contador;
+   });
+  } else {
+   this.llenarMaterias();
+  }
  }
 }

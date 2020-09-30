@@ -38,6 +38,12 @@ export class MateriasService {
    });
  }
 
+ obtenerMateriasNombre(nombre: string): Observable<MateriaDTO[]> {
+  return this._http.get<[]>(
+   `${this.url}/materia/buscar/${nombre}`,
+   this.httpOptions
+  );
+ }
  obtenerMaterias(pagina: number): Observable<MateriaDTO[]> {
   return this._http.get<[]>(
    `${this.url}/materia?pagina=${pagina}`,
