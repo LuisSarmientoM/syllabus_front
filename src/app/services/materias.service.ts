@@ -118,7 +118,6 @@ export class MateriasService {
     this.httpOptions
    )
    .subscribe((data) => {
-    console.log(data);
     alert(`${unidadTematica} A sido eliminado`);
    });
  }

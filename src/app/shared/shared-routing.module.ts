@@ -31,6 +31,7 @@ const routes: Routes = [
       (m) => m.UsuariosModule
      ),
    },
+   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   ],
  },
 ];
