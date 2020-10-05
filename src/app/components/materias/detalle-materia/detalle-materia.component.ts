@@ -19,6 +19,7 @@ export class DetalleMateriaComponent implements OnInit {
  notas;
  isOld = false;
  _id: string;
+ _idOld: string;
  constructor(
   public location: Location,
   private _materiaService: MateriasService,
@@ -36,7 +37,16 @@ export class DetalleMateriaComponent implements OnInit {
    });
  }
  descargar() {
-  console.log('Descargando elemento');
+  this._materiaService
+   .generarDocumento(this._id, this._idOld)
+   .subscribe((res) => {
+    const pdf = new Blob([res], {
+     type: 'application/pdf',
+     endings: 'transparent',
+    });
+
+    window.open(URL.createObjectURL(pdf));
+   });
  }
  regresar() {
   this.location.back();
@@ -61,6 +71,7 @@ export class DetalleMateriaComponent implements OnInit {
  }
  version(event: string) {
   this.isOld = true;
+  this._idOld = event;
 
   this._materiaService
    .obtenerVersion(this._id, event)

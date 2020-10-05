@@ -118,6 +118,7 @@ export class MateriasService {
     this.httpOptions
    )
    .subscribe((data) => {
+    console.log(data);
     alert(`${unidadTematica} A sido eliminado`);
    });
  }
@@ -137,5 +138,12 @@ export class MateriasService {
    .subscribe((data) => {
     alert(`Se eliminó la meta correctamente`);
    });
+ }
+ generarDocumento(idMateria: string, old: string) {
+  //  `${this.url}/materia/version/${_id}-${_idVersion}`,
+
+  return this._http.get(`${this.url}/documento/${idMateria}-${old}`, {
+   responseType: 'blob',
+  });
  }
 }
