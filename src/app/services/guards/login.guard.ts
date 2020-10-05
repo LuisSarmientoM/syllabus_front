@@ -12,6 +12,7 @@ export class LoginGuard implements CanActivate {
    this._loginService.verificaJWT().subscribe(
     (res) => {
      if (res) return true;
+     else this.router.navigate(['/login']);
     },
     (err) => {
      this.router.navigate(['/login']);
