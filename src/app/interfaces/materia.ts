@@ -1,13 +1,17 @@
+import { CaracterDTO } from './caracter';
+import { CicloDTO } from './ciclo';
+import { ComponenteDTO } from './componente';
+import { semestreDTO } from './semestre';
 import { UsuarioDTO } from './usuario';
 
 export class PrincipalDTO {
  readonly codigoMateria: number;
  readonly numeroCreditos: number;
  readonly nombreMateria: number;
- readonly semestre: number;
- readonly caracter: string;
- readonly ciclo: string;
- readonly componente: string;
+ readonly semestre: semestreDTO;
+ readonly caracter: CaracterDTO;
+ readonly ciclo: CicloDTO;
+ readonly componente: ComponenteDTO;
  readonly docente: UsuarioDTO;
 }
 export interface DuracionDTO {

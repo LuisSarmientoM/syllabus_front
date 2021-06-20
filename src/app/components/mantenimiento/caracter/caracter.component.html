@@ -1,0 +1,10 @@
+<a mat-raised-button (click)="crearNuevoCaracter()">Crear nuevo Caracter academico</a>
+
+<mat-card class="card pointer" *ngFor="let caracter of caracteres">
+
+  <mat-card-header>
+    <mat-card-title>
+      {{ caracter.caracter }}
+    </mat-card-title>
+  </mat-card-header>
+</mat-card>

@@ -1,0 +1,7 @@
+<form [formGroup]='form' (submit)='submit()'>
+  <mat-form-field appearance='outline' *ngFor="let item of formArray">
+    <mat-label>{{item.label}}</mat-label>
+    <input matInput type="{{item.type}}" [formControlName]='item.name'>
+  </mat-form-field>
+  <button>guardar</button>
+</form>

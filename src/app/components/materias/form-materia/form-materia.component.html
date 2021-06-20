@@ -36,14 +36,40 @@
      </mat-option>
     </mat-select>
    </mat-form-field>
-   <mat-form-field *ngIf="campo.label !== 'Docente'">
+<mat-form-field *ngIf="campo.label === 'Semestre'">
     <mat-label>{{ campo.label }}</mat-label>
-    <mat-select [formControlName]="campo.key">
+    <mat-select [compareWith]="selectUsuario" [formControlName]="campo.key">
      <mat-option *ngFor="let option of campo.option" [value]="option.key">
       {{ option.value }}
      </mat-option>
     </mat-select>
    </mat-form-field>
+   <mat-form-field *ngIf="campo.label === 'Caracter Asignatura'">
+    <mat-label>{{ campo.label }}</mat-label>
+    <mat-select [compareWith]="selectUsuario" [formControlName]="campo.key">
+     <mat-option *ngFor="let option of campo.option" [value]="option.key">
+      {{ option.value }}
+     </mat-option>
+    </mat-select>
+   </mat-form-field>
+   <mat-form-field *ngIf="campo.label === 'Ciclo'">
+    <mat-label>{{ campo.label }}</mat-label>
+    <mat-select [compareWith]="selectUsuario" [formControlName]="campo.key">
+     <mat-option *ngFor="let option of campo.option" [value]="option.key">
+      {{ option.value }}
+     </mat-option>
+    </mat-select>
+   </mat-form-field>
+   <mat-form-field *ngIf="campo.label === 'Componente Asignatura'">
+    <mat-label>{{ campo.label }}</mat-label>
+    <mat-select [compareWith]="selectUsuario" [formControlName]="campo.key">
+     <mat-option *ngFor="let option of campo.option" [value]="option.key">
+      {{ option.value }}
+     </mat-option>
+    </mat-select>
+   </mat-form-field>
+
+   
   </p>
 
   <p *ngSwitchCase="'textarea'">

@@ -9,9 +9,9 @@ import {
 import { NavigationService } from '../services/navigation.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { MateriasService } from 'src/app/services/materias.service';
-import { UsuariosService } from 'src/app/services/usuarios.service';
-
+import { MateriasService } from '../../../services/materias.service';
+import { UsuariosService } from '../../../services/usuarios.service';
+import { MantenimientoService } from "../../../services/mantenimiento.service";
 @Component({
  selector: 'app-form-materia',
  templateUrl: './form-materia.component.html',
@@ -25,6 +25,10 @@ export class FormMateriaComponent implements OnInit {
  idMeta: string;
  multibtn = true;
  usuarios: any[] = [];
+ semestre: any[] =[];
+caracter: any[] =[];
+ciclo: any[] =[];
+componente: any = []
  selected;
  constructor(
   private formBuilder: FormBuilder,
@@ -32,7 +36,8 @@ export class FormMateriaComponent implements OnInit {
   private router: ActivatedRoute,
   public location: Location,
   private _materiaService: MateriasService,
-  private _usuariosService: UsuariosService
+  private _usuariosService: UsuariosService,
+  private _mantenimientoService: MantenimientoService
  ) {
   this.seccion = router.snapshot.paramMap.get('seccion');
   this.id = router.snapshot.paramMap.get('id');
@@ -106,6 +111,26 @@ export class FormMateriaComponent implements OnInit {
 
       item.option = this.usuarios;
      }
+     else if (item.key === 'semestre') {
+      this.getSemestre();
+
+      item.option = this.semestre;
+     }
+     else if (item.key === 'caracter') {
+      this.getcaracter();
+
+      item.option = this.caracter;
+     }
+     else if (item.key === 'ciclo') {
+      this.getciclo();
+
+      item.option = this.ciclo;
+     }
+     else if (item.key === 'componente') {
+      this.getcomponente();
+
+      item.option = this.componente;
+     }
 
      array[item.key] = [res[item.key], item.required];
     }
@@ -154,12 +179,52 @@ export class FormMateriaComponent implements OnInit {
   }
  }
  private getUsuarios() {
+   this.usuarios = []
   this._usuariosService.obtenerTodosUsuarios().subscribe((res: any) => {
-   // this.usuarios = res;
    for (const usuario of res) {
     this.usuarios.push({
      key: usuario._id,
      value: `${usuario.nombre} ${usuario.primerApellido} ${usuario.segundoApellido}`,
+    });
+   }
+  });
+ }
+ private getSemestre() {
+  this._mantenimientoService.obtenerMantenimiento('semestre').subscribe((res: any) => {
+   for (const semestre of res) {
+    this.semestre.push({
+     key: semestre._id,
+     value: semestre.descripcion,
+    });
+   }
+  });
+ }
+ private getcaracter() {
+  this._mantenimientoService.obtenerMantenimiento('caracter').subscribe((res: any) => {
+   for (const caracter of res) {
+    this.caracter.push({
+     key: caracter._id,
+     value: caracter.caracter,
+    });
+   }
+  });
+ }
+ private getciclo() {
+  this._mantenimientoService.obtenerMantenimiento('ciclo').subscribe((res: any) => {
+   for (const ciclo of res) {
+    this.ciclo.push({
+     key: ciclo._id,
+     value: `${ciclo.anio}-${ciclo.periodo}`,
+    });
+   }
+  });
+ }
+ private getcomponente() {
+  this._mantenimientoService.obtenerMantenimiento('componente').subscribe((res: any) => {
+   for (const componente of res) {
+    this.componente.push({
+     key: componente._id,
+     value: componente.componente
     });
    }
   });

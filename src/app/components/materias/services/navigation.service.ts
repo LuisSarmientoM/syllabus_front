@@ -35,7 +35,8 @@ export class NavigationService {
                     label: "Semestre",
                     defaultValue: "",
                     required: Validators.required,
-                    type: "number",
+                    type: "select",
+                    option: []
                 },
                 {
                     key: "caracter",
@@ -43,18 +44,15 @@ export class NavigationService {
                     defaultValue: null,
                     required: Validators.required,
                     type: "select",
-                    option: [
-                        { value: "Teorico", key: "Teorico" },
-                        { value: "Practica", key: "Practica" },
-                        { value: "TEORICO-PRACTICA", key: "TEORICO-PRACTICA" },
-                    ],
+                    option: [],
                 },
                 {
                     key: "ciclo",
                     label: "Ciclo",
                     defaultValue: "",
                     required: Validators.required,
-                    type: "textbox",
+                    type: "select",
+                    option: []
                 },
                 {
                     key: "componente",
@@ -62,16 +60,7 @@ export class NavigationService {
                     defaultValue: "",
                     required: Validators.required,
                     type: "select",
-                    option: [
-                        {
-                            value: "DE CIENCIAS APLICADAS",
-                            key: "DE CIENCIAS APLICADAS",
-                        },
-                        {
-                            value: "DE CIENCIAS ESPECIFICAS",
-                            key: "DE CIENCIAS ESPECIFICAS",
-                        },
-                    ],
+                    option: [],
                 },
                 {
                     key: "docente",

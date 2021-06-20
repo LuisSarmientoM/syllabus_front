@@ -31,10 +31,10 @@
     <strong>Codigo de materia: </strong>
     {{ materia.principal.codigoMateria }}
    </p>
-   <p><strong>Semestre: </strong>{{ materia.principal.semestre }}</p>
-   <p><strong>Caracter: </strong>{{ materia.principal.caracter }}</p>
-   <p><strong>Ciclo: </strong>{{ materia.principal.ciclo }}</p>
-   <p><strong>componente: </strong>{{ materia.principal.componente }}</p>
+   <p><strong>Semestre: </strong>{{ materia.principal.semestre.descripcion }}</p>
+   <p><strong>Caracter: </strong>{{ materia.principal.caracter.caracter }}</p>
+   <p><strong>Ciclo: </strong>{{ materia.principal.ciclo.anio }}-{{ materia.principal.ciclo.periodo }}</p>
+   <p><strong>componente: </strong>{{ materia.principal.componente.componente }}</p>
    <p>
     <strong>docente: </strong>
     {{ materia.principal.docente.nombre }}

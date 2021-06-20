@@ -1,0 +1,11 @@
+<a mat-raised-button (click)="crearNuevoComponente()">Crear nuevo Componente</a>
+
+<mat-card class="card pointer" *ngFor="let componente of componentes">
+
+  <mat-card-header>
+    <mat-card-title>
+      {{ componente.componente }}
+
+    </mat-card-title>
+  </mat-card-header>
+</mat-card>

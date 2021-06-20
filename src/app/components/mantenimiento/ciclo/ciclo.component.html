@@ -1,0 +1,10 @@
+<a mat-raised-button (click)="crearNuevoCiclo()">Crear nuevo Ciclo</a>
+
+<mat-card class="card pointer" *ngFor="let ciclo of ciclos">
+
+  <mat-card-header>
+    <mat-card-title>
+      {{ ciclo.anio }}-{{ciclo.periodo}}
+    </mat-card-title>
+  </mat-card-header>
+</mat-card>

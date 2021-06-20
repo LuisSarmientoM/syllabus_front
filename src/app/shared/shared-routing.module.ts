@@ -31,6 +31,14 @@ const routes: Routes = [
       (m) => m.UsuariosModule
      ),
    },
+   {
+    path: 'mantenimiento',
+    canActivate: [LoginGuard],
+    loadChildren: () =>
+     import('../components/mantenimiento/mantenimiento.module').then(
+      (m) => m.MantenimientoModule
+     ),
+   },
    { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   ],
  },

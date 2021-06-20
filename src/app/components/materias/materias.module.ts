@@ -13,6 +13,7 @@ import { MateriasService } from "src/app/services/materias.service";
 import { HttpClientModule } from "@angular/common/http";
 import { UsuariosService } from "src/app/services/usuarios.service";
 import { SharedModule } from "src/app/shared/shared.module";
+import { MantenimientoService } from "src/app/services/mantenimiento.service";
 
 @NgModule({
     declarations: [
@@ -29,6 +30,6 @@ import { SharedModule } from "src/app/shared/shared.module";
         HttpClientModule,
         SharedModule,
     ],
-    providers: [MateriasService, UsuariosService],
+    providers: [MateriasService, UsuariosService, MantenimientoService],
 })
 export class MateriasModule {}

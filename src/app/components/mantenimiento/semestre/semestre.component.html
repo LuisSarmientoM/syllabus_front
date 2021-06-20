@@ -1,0 +1,13 @@
+<a mat-raised-button (click)="crearNuevoSemestre()">Crear nuevo semestre</a>
+
+<mat-card class="card pointer" *ngFor="let semestre of semestres">
+
+  <mat-card-header>
+    <mat-card-title>
+      {{ semestre.descripcion }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ semestre.numero }}
+    </mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
